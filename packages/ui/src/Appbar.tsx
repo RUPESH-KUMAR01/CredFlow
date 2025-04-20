@@ -1,25 +1,30 @@
-import { Button } from "./button";
+"use client";
+import { signOut, useSession } from "next-auth/react";
 
-interface AppbarProps {
-    user?: {
-        name?: string | null;
-    },
-    // TODO: can u figure out what the type should be here?
-    onSignin: any,
-    onSignout: any
-}
+export default function AppBar() {
+  const { data: session } = useSession();
 
-export const Appbar = ({
-    user,
-    onSignin,
-    onSignout
-}: AppbarProps) => {
-    return <div className="flex justify-between border-b px-4">
-        <div className="text-lg flex flex-col justify-center">
-            PayTM
-        </div>
-        <div className="flex flex-col justify-center pt-2">
-            <Button onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
-        </div>
-    </div>
+  return (
+    <header className="h-16 bg-zinc-900 border-b border-zinc-700 flex items-center justify-between px-6 sticky top-0 z-10">
+      <div className="flex items-center">
+        <span className="text-xl font-bold text-silver cursor-pointer hover:text-white transition-colors">
+          CredFlow
+        </span>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        {session?.user && (
+          <>
+            <div className="text-sm text-silver">{session.user.name}</div>
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="px-3 py-1 text-sm bg-zinc-700 hover:bg-zinc-600 text-white rounded-md"
+            >
+              Sign out
+            </button>
+          </>
+        )}
+      </div>
+    </header>
+  );
 }
