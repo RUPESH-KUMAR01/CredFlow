@@ -33,7 +33,7 @@ This project is organized as a monorepo using Turborepo with the following packa
 ### Prerequisites
 
 - Node.js (v18 or higher)
-- npm or yarn
+- npm 
 - PostgreSQL database
 
 ### Installation
