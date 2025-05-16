@@ -1,81 +1,82 @@
-# Turborepo starter
+# CredFlow
 
-This is an official starter Turborepo.
+CredFlow is a digital wallet application built with Next.js and TypeScript that facilitates peer-to-peer money transfers and bank transactions.
 
-## Using this example
+## 🚀 Features
 
-Run the following command:
+- **User Authentication**: Secure login and registration system
+- **P2P Transfers**: Send and receive money between users
+- **Bank Transactions**: Top-up your wallet from bank accounts
+- **Transaction History**: View your recent transaction activities
+- **Modern UI**: Clean and responsive user interface
 
-```sh
-npx create-turbo@latest
-```
+## 📋 Project Structure
 
-## What's inside?
+This project is organized as a monorepo using Turborepo with the following packages:
 
-This Turborepo includes the following packages/apps:
+- `apps/user-app`: The main Next.js application for end users
+- `apps/bankwebhook`: Service for handling bank transaction webhooks
+- `packages/db`: Database schema and client
+- `packages/ui`: Shared UI components
 
-### Apps and Packages
+## 🛠️ Tech Stack
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- **Frontend**: Next.js 14 (App Router), React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API routes with server actions
+- **Database**: Prisma ORM with PostgreSQL
+- **Authentication**: NextAuth.js
+- **Styling**: Tailwind CSS
+- **Build Tool**: Turborepo
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## 🏗️ Project Setup
 
-### Utilities
+### Prerequisites
 
-This Turborepo has some additional tools already setup for you:
+- Node.js (v18 or higher)
+- npm or yarn
+- PostgreSQL database
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Installation
 
-### Build
+1. Clone the repository:
+   ```
+   git clone https://github.com/RUPESH-KUMAR01/CredFlow.git
+   cd CredFlow
+   ```
 
-To build all apps and packages, run the following command:
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-```
-cd my-turborepo
-pnpm build
-```
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following:
+   ```
+   DATABASE_URL="postgresql://user:password@localhost:5432/credflow"
+   NEXTAUTH_SECRET="your-secret"
+   NEXTAUTH_URL="http://localhost:3000"
+   ```
 
-### Develop
+4. Initialize the database:
+   ```
+   cd packages/db
+   npx prisma migrate deploy
+   npx prisma generate
+   ```
+   This will run the existing migrations to set up your database and generate the Prisma client.
 
-To develop all apps and packages, run the following command:
+5. Start the applications (each needs to be started separately):
 
-```
-cd my-turborepo
-pnpm dev
-```
+   For the User App:
+   ```
+   cd apps/user-app
+   npm run dev
+   ```
+   The user application will be available at [http://localhost:3000](http://localhost:3000)
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+   For the Bank Webhook Service:
+   ```
+   cd apps/bankwebhook
+   npm run dev
+   ```
+   The bank webhook service will run on a different port (usually 3001).

@@ -7,7 +7,12 @@
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
     "./appbar": "./src/Appbar.tsx",
-    "./SidebarItem":"./src/SidebarItem.tsx"
+    "./SidebarItem":"./src/SidebarItem.tsx",
+    "./Addmoney" : "./src/Addmoney.tsx",
+    "./BalanceCard" : "./src/BalanceCard.tsx",
+    "./OnRampTransactions" : "./src/OnRampTransactions.tsx",
+    "./Form" : "./src/Form.tsx",
+    "./Recent" : "./src/Recent.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
