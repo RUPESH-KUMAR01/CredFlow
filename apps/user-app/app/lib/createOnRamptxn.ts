@@ -11,14 +11,6 @@ export async function createOnRamptxn(amount:number,provider:string){
         throw new Error("Not authenticated");
     }
     const userId = session.user.id;
-    const user = await db.user.findUnique({
-        where: {
-            id: userId,
-        },
-    });
-    if (!user) {
-        throw new Error("User not found");
-    }
     const token = randomUUID();
     const onRampTxn = await db.onRampTransaction.create({
         data:{
